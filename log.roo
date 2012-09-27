@@ -1,0 +1,23 @@
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-09-27 00:38:16
+project --topLevelPackage com.terram
+jpa setup --provider HIBERNATE --database MYSQL
+web mvc json setup
+entity jpa --class ~.Calendar --testAutomatically
+entity jpa --class ~.Event --testAutomatically
+entity jpa --class ~.Code --testAutomatically
+entity jpa --class ~.Category --testAutomatically
+entity jpa --class ~.CodeCategory --testAutomatically
+entity jpa --class ~.SessionToken --testAutomatically
+entity jpa --class ~.Users --testAutomatically
+entity jpa --class ~.UsersCalendar --testAutomatically
+web mvc all --package ~.web
+selenium test --controller ~.web.CodeController
+selenium test --controller ~.web.CalendarController
+selenium test --controller ~.web.EventController
+perform test
+quit
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-09-27 00:47:24
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-09-27 00:52:09
+quit
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-09-27 00:52:42
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-09-27 01:01:21
