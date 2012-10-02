@@ -21,3 +21,56 @@ quit
 quit
 // Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-09-27 00:52:42
 // Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-09-27 01:01:21
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-09-29 12:52:08
+logging setup --package WEB --level DEBUG
+security setup
+controller class --class ~.web.PublicLoginController
+// [failed] finder list --class ~.domain.Users --filter code,equ
+finder list --class ~.terram.Users --filter code,equ
+hint
+hint
+quit
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-09-29 13:22:47
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-09-29 13:22:52
+finder list --class ~.terram.Users 
+hint
+finder list
+finder list --class ~.Users --depth 2
+finder list
+quit
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-09-29 15:25:30
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-09-29 15:25:36
+finder list --class com.terram.Users
+addon list
+addon list
+osgi obr url add --url http://repository-sillyweasel.forge.cloudbees.com/release/repository.xml
+osgi obr start --bundleSymbolicName org.sillyweasel.addons.jqueryui
+osgi obr url remove --url http://repository-sillyweasel.forge.cloudbees.com/release/repository.xml
+addon install id --searchResultId 20
+pgp key view --keyId 0xB6F65A34
+pgp trust --keyId  0xB6F65A34
+osgi obr url add --url http://repository-sillyweasel.forge.cloudbees.com/release/repository.xml
+osgi obr start --bundleSymbolicName org.sillyweasel.addons.jqueryui
+osgi obr url remove --url http://repository-sillyweasel.forge.cloudbees.com/release/repository.xml
+addon install id --searchResultId 20
+focus --class ~.Users
+focus --class ~.Calendar
+hint
+addon search --requiresCommand finder
+addon list
+finder list
+field string --fieldName id 
+finder list
+focus --class ~.Users
+field string --fieldName id
+field string --fieldName username
+field string --fieldName password
+field date --type java.util.Date --fieldName lastRevised
+field string --fieldName lastRevisedBy
+entity jpa --class ~.Person --testAutomatically
+entity jpa --class ~.Address --testAutomatically
+focus --class ~.Users
+finder list
+finder list --filter id,equ
+finder add --finderName findUsersesByIdEquals
+finder add --finderName findUsersesByUsernameEquals

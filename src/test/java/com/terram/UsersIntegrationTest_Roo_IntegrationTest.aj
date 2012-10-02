@@ -37,11 +37,11 @@ privileged aspect UsersIntegrationTest_Roo_IntegrationTest {
     public void UsersIntegrationTest.testFindUsers() {
         Users obj = dod.getRandomUsers();
         Assert.assertNotNull("Data on demand for 'Users' failed to initialize correctly", obj);
-        Long id = obj.getId();
+        Long id = obj.getId_();
         Assert.assertNotNull("Data on demand for 'Users' failed to provide an identifier", id);
         obj = Users.findUsers(id);
         Assert.assertNotNull("Find method for 'Users' illegally returned null for id '" + id + "'", obj);
-        Assert.assertEquals("Find method for 'Users' returned the incorrect identifier", id, obj.getId());
+        Assert.assertEquals("Find method for 'Users' returned the incorrect identifier", id, obj.getId_());
     }
     
     @Test
@@ -70,7 +70,7 @@ privileged aspect UsersIntegrationTest_Roo_IntegrationTest {
     public void UsersIntegrationTest.testFlush() {
         Users obj = dod.getRandomUsers();
         Assert.assertNotNull("Data on demand for 'Users' failed to initialize correctly", obj);
-        Long id = obj.getId();
+        Long id = obj.getId_();
         Assert.assertNotNull("Data on demand for 'Users' failed to provide an identifier", id);
         obj = Users.findUsers(id);
         Assert.assertNotNull("Find method for 'Users' illegally returned null for id '" + id + "'", obj);
@@ -84,14 +84,14 @@ privileged aspect UsersIntegrationTest_Roo_IntegrationTest {
     public void UsersIntegrationTest.testMergeUpdate() {
         Users obj = dod.getRandomUsers();
         Assert.assertNotNull("Data on demand for 'Users' failed to initialize correctly", obj);
-        Long id = obj.getId();
+        Long id = obj.getId_();
         Assert.assertNotNull("Data on demand for 'Users' failed to provide an identifier", id);
         obj = Users.findUsers(id);
         boolean modified =  dod.modifyUsers(obj);
         Integer currentVersion = obj.getVersion();
         Users merged = obj.merge();
         obj.flush();
-        Assert.assertEquals("Identifier of merged object not the same as identifier of original object", merged.getId(), id);
+        Assert.assertEquals("Identifier of merged object not the same as identifier of original object", merged.getId_(), id);
         Assert.assertTrue("Version for 'Users' failed to increment on merge and flush directive", (currentVersion != null && obj.getVersion() > currentVersion) || !modified);
     }
     
@@ -100,17 +100,17 @@ privileged aspect UsersIntegrationTest_Roo_IntegrationTest {
         Assert.assertNotNull("Data on demand for 'Users' failed to initialize correctly", dod.getRandomUsers());
         Users obj = dod.getNewTransientUsers(Integer.MAX_VALUE);
         Assert.assertNotNull("Data on demand for 'Users' failed to provide a new transient entity", obj);
-        Assert.assertNull("Expected 'Users' identifier to be null", obj.getId());
+        Assert.assertNull("Expected 'Users' identifier to be null", obj.getId_());
         obj.persist();
         obj.flush();
-        Assert.assertNotNull("Expected 'Users' identifier to no longer be null", obj.getId());
+        Assert.assertNotNull("Expected 'Users' identifier to no longer be null", obj.getId_());
     }
     
     @Test
     public void UsersIntegrationTest.testRemove() {
         Users obj = dod.getRandomUsers();
         Assert.assertNotNull("Data on demand for 'Users' failed to initialize correctly", obj);
-        Long id = obj.getId();
+        Long id = obj.getId_();
         Assert.assertNotNull("Data on demand for 'Users' failed to provide an identifier", id);
         obj = Users.findUsers(id);
         obj.remove();

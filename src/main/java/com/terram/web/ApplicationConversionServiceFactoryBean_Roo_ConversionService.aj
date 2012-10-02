@@ -23,7 +23,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<Calendar, String> ApplicationConversionServiceFactoryBean.getCalendarToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<com.terram.Calendar, java.lang.String>() {
             public String convert(Calendar calendar) {
-                return "(no displayable fields)";
+                return new StringBuilder().append(calendar.getId()).toString();
             }
         };
     }
@@ -167,7 +167,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<Users, String> ApplicationConversionServiceFactoryBean.getUsersToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<com.terram.Users, java.lang.String>() {
             public String convert(Users users) {
-                return "(no displayable fields)";
+                return new StringBuilder().append(users.getId()).append(' ').append(users.getUsername()).append(' ').append(users.getPassword()).append(' ').append(users.getLastRevised()).toString();
             }
         };
     }

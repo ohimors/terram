@@ -37,11 +37,11 @@ privileged aspect CalendarIntegrationTest_Roo_IntegrationTest {
     public void CalendarIntegrationTest.testFindCalendar() {
         Calendar obj = dod.getRandomCalendar();
         Assert.assertNotNull("Data on demand for 'Calendar' failed to initialize correctly", obj);
-        Long id = obj.getId();
+        Long id = obj.getId_();
         Assert.assertNotNull("Data on demand for 'Calendar' failed to provide an identifier", id);
         obj = Calendar.findCalendar(id);
         Assert.assertNotNull("Find method for 'Calendar' illegally returned null for id '" + id + "'", obj);
-        Assert.assertEquals("Find method for 'Calendar' returned the incorrect identifier", id, obj.getId());
+        Assert.assertEquals("Find method for 'Calendar' returned the incorrect identifier", id, obj.getId_());
     }
     
     @Test
@@ -70,7 +70,7 @@ privileged aspect CalendarIntegrationTest_Roo_IntegrationTest {
     public void CalendarIntegrationTest.testFlush() {
         Calendar obj = dod.getRandomCalendar();
         Assert.assertNotNull("Data on demand for 'Calendar' failed to initialize correctly", obj);
-        Long id = obj.getId();
+        Long id = obj.getId_();
         Assert.assertNotNull("Data on demand for 'Calendar' failed to provide an identifier", id);
         obj = Calendar.findCalendar(id);
         Assert.assertNotNull("Find method for 'Calendar' illegally returned null for id '" + id + "'", obj);
@@ -84,14 +84,14 @@ privileged aspect CalendarIntegrationTest_Roo_IntegrationTest {
     public void CalendarIntegrationTest.testMergeUpdate() {
         Calendar obj = dod.getRandomCalendar();
         Assert.assertNotNull("Data on demand for 'Calendar' failed to initialize correctly", obj);
-        Long id = obj.getId();
+        Long id = obj.getId_();
         Assert.assertNotNull("Data on demand for 'Calendar' failed to provide an identifier", id);
         obj = Calendar.findCalendar(id);
         boolean modified =  dod.modifyCalendar(obj);
         Integer currentVersion = obj.getVersion();
         Calendar merged = obj.merge();
         obj.flush();
-        Assert.assertEquals("Identifier of merged object not the same as identifier of original object", merged.getId(), id);
+        Assert.assertEquals("Identifier of merged object not the same as identifier of original object", merged.getId_(), id);
         Assert.assertTrue("Version for 'Calendar' failed to increment on merge and flush directive", (currentVersion != null && obj.getVersion() > currentVersion) || !modified);
     }
     
@@ -100,17 +100,17 @@ privileged aspect CalendarIntegrationTest_Roo_IntegrationTest {
         Assert.assertNotNull("Data on demand for 'Calendar' failed to initialize correctly", dod.getRandomCalendar());
         Calendar obj = dod.getNewTransientCalendar(Integer.MAX_VALUE);
         Assert.assertNotNull("Data on demand for 'Calendar' failed to provide a new transient entity", obj);
-        Assert.assertNull("Expected 'Calendar' identifier to be null", obj.getId());
+        Assert.assertNull("Expected 'Calendar' identifier to be null", obj.getId_());
         obj.persist();
         obj.flush();
-        Assert.assertNotNull("Expected 'Calendar' identifier to no longer be null", obj.getId());
+        Assert.assertNotNull("Expected 'Calendar' identifier to no longer be null", obj.getId_());
     }
     
     @Test
     public void CalendarIntegrationTest.testRemove() {
         Calendar obj = dod.getRandomCalendar();
         Assert.assertNotNull("Data on demand for 'Calendar' failed to initialize correctly", obj);
-        Long id = obj.getId();
+        Long id = obj.getId_();
         Assert.assertNotNull("Data on demand for 'Calendar' failed to provide an identifier", id);
         obj = Calendar.findCalendar(id);
         obj.remove();

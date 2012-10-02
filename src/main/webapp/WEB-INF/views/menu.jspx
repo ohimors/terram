@@ -6,5 +6,16 @@
         <menu:category id="c_seleniumtests" z="PPLMd2yNB6/LSbjIWogAacRPU+Q=">
             <menu:item id="si_seleniumtests_test" messageCode="selenium_menu_test_suite" url="/resources/selenium/test-suite.xhtml" z="wwunW/IPDcunN97u41MvMJZQ2to="/>
         </menu:category>
+        <menu:category id="c_controller" z="nj8Dm3hojIyIEyPkwE1UMDIs+K8=">
+            <menu:item id="i_controller__publicloginindex_id" messageCode="global_generic" url="/publiclogin/index" z="BbN76bdRXBNAhjBC2T1buSDOq/U="/>
+        </menu:category>
+        <menu:category id="c_calendar" z="6hzoERNaGGuqxQSFbgsnk2836BM=">
+            <menu:item id="i_calendar_new" messageCode="global_menu_new" url="/calendars?form" z="1s/S2r6Hly9f9fp9NnGGtoZsF1w="/>
+            <menu:item id="i_calendar_list" messageCode="global_menu_list" url="/calendars?page=1&amp;size=${empty param.size ? 10 : param.size}" z="1kHqmU93/8QJQmxeRBkDuYdk+uU="/>
+        </menu:category>
+        <menu:category id="c_users" z="Ysam8XVhG5uotPoUGGxkia1RE/s=">
+            <menu:item id="i_users_new" messageCode="global_menu_new" url="/userses?form" z="utrdLkYms6xk5f4IDxc9zrg5FWs="/>
+            <menu:item id="i_users_list" messageCode="global_menu_list" url="/userses?page=1&amp;size=${empty param.size ? 10 : param.size}" z="tqSwojZmRduyx4xtHWcJzgbgtJk="/>
+        </menu:category>
     </menu:menu>
 </div>

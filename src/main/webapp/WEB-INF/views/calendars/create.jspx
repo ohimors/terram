@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:create id="fc_com_terram_Calendar" modelAttribute="calendar" path="/calendars" render="${empty dependencies}" z="SyMqjGQzAPNBJi0lfIDCvrByhWY=">
+        <field:input field="id" id="c_com_terram_Calendar_id" z="J9ek0YOWl9LLOeMJGya44SRWpZY="/>
+    </form:create>
+    <form:dependency dependencies="${dependencies}" id="d_com_terram_Calendar" render="${not empty dependencies}" z="lPfzLDEH2VdUPzCK+Nf/yOyPlfY="/>
+</div>

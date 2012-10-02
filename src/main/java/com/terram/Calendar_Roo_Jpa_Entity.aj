@@ -17,19 +17,19 @@ privileged aspect Calendar_Roo_Jpa_Entity {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Long Calendar.id;
+    @Column(name = "id_")
+    private Long Calendar.id_;
     
     @Version
     @Column(name = "version")
     private Integer Calendar.version;
     
-    public Long Calendar.getId() {
-        return this.id;
+    public Long Calendar.getId_() {
+        return this.id_;
     }
     
-    public void Calendar.setId(Long id) {
-        this.id = id;
+    public void Calendar.setId_(Long id) {
+        this.id_ = id;
     }
     
     public Integer Calendar.getVersion() {

@@ -7,6 +7,9 @@ import com.terram.Users;
 import com.terram.UsersDataOnDemand;
 import java.security.SecureRandom;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
@@ -24,7 +27,37 @@ privileged aspect UsersDataOnDemand_Roo_DataOnDemand {
     
     public Users UsersDataOnDemand.getNewTransientUsers(int index) {
         Users obj = new Users();
+        setId(obj, index);
+        setLastRevised(obj, index);
+        setLastRevisedBy(obj, index);
+        setPassword(obj, index);
+        setUsername(obj, index);
         return obj;
+    }
+    
+    public void UsersDataOnDemand.setId(Users obj, int index) {
+        String id = "id_" + index;
+        obj.setId(id);
+    }
+    
+    public void UsersDataOnDemand.setLastRevised(Users obj, int index) {
+        Date lastRevised = new GregorianCalendar(Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH), Calendar.getInstance().get(Calendar.HOUR_OF_DAY), Calendar.getInstance().get(Calendar.MINUTE), Calendar.getInstance().get(Calendar.SECOND) + new Double(Math.random() * 1000).intValue()).getTime();
+        obj.setLastRevised(lastRevised);
+    }
+    
+    public void UsersDataOnDemand.setLastRevisedBy(Users obj, int index) {
+        String lastRevisedBy = "lastRevisedBy_" + index;
+        obj.setLastRevisedBy(lastRevisedBy);
+    }
+    
+    public void UsersDataOnDemand.setPassword(Users obj, int index) {
+        String password = "password_" + index;
+        obj.setPassword(password);
+    }
+    
+    public void UsersDataOnDemand.setUsername(Users obj, int index) {
+        String username = "username_" + index;
+        obj.setUsername(username);
     }
     
     public Users UsersDataOnDemand.getSpecificUsers(int index) {
@@ -36,14 +69,14 @@ privileged aspect UsersDataOnDemand_Roo_DataOnDemand {
             index = data.size() - 1;
         }
         Users obj = data.get(index);
-        Long id = obj.getId();
+        Long id = obj.getId_();
         return Users.findUsers(id);
     }
     
     public Users UsersDataOnDemand.getRandomUsers() {
         init();
         Users obj = data.get(rnd.nextInt(data.size()));
-        Long id = obj.getId();
+        Long id = obj.getId_();
         return Users.findUsers(id);
     }
     

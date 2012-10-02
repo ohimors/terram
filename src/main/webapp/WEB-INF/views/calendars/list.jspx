@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_com_terram_Calendar" items="${calendars}" z="Ha9g2X4RSJoDWBo16icU5EnmGJs=">
+        <table:table data="${calendars}" id="l_com_terram_Calendar" path="/calendars" typeIdFieldName="id_" z="8FrLoMtCx+HmR1YzYH6S0t9Pw4g=">
+            <table:column id="c_com_terram_Calendar_id" property="id" z="5bzXEusz0bcBoAuPzgb9y3EsniA="/>
+        </table:table>
+    </page:list>
+</div>

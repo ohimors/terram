@@ -28,9 +28,9 @@ privileged aspect Calendar_Roo_Jpa_ActiveRecord {
         return entityManager().createQuery("SELECT o FROM Calendar o", Calendar.class).getResultList();
     }
     
-    public static Calendar Calendar.findCalendar(Long id) {
-        if (id == null) return null;
-        return entityManager().find(Calendar.class, id);
+    public static Calendar Calendar.findCalendar(Long id_) {
+        if (id_ == null) return null;
+        return entityManager().find(Calendar.class, id_);
     }
     
     public static List<Calendar> Calendar.findCalendarEntries(int firstResult, int maxResults) {
@@ -49,7 +49,7 @@ privileged aspect Calendar_Roo_Jpa_ActiveRecord {
         if (this.entityManager.contains(this)) {
             this.entityManager.remove(this);
         } else {
-            Calendar attached = Calendar.findCalendar(this.id);
+            Calendar attached = Calendar.findCalendar(this.id_);
             this.entityManager.remove(attached);
         }
     }

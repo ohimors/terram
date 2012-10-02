@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:update id="fu_com_terram_Calendar" idField="id_" modelAttribute="calendar" path="/calendars" versionField="Version" z="h1PUJxZmY51z76VGt7rqNWoWGRo=">
+        <field:input field="id" id="c_com_terram_Calendar_id" z="J9ek0YOWl9LLOeMJGya44SRWpZY="/>
+    </form:update>
+</div>

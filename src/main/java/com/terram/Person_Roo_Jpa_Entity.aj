@@ -3,7 +3,7 @@
 
 package com.terram;
 
-import com.terram.Users;
+import com.terram.Person;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,32 +11,32 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Version;
 
-privileged aspect Users_Roo_Jpa_Entity {
+privileged aspect Person_Roo_Jpa_Entity {
     
-    declare @type: Users: @Entity;
+    declare @type: Person: @Entity;
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id_")
-    private Long Users.id_;
+    @Column(name = "id")
+    private Long Person.id;
     
     @Version
     @Column(name = "version")
-    private Integer Users.version;
+    private Integer Person.version;
     
-    public Long Users.getId_() {
-        return this.id_;
+    public Long Person.getId() {
+        return this.id;
     }
     
-    public void Users.setId_(Long id) {
-        this.id_ = id;
+    public void Person.setId(Long id) {
+        this.id = id;
     }
     
-    public Integer Users.getVersion() {
+    public Integer Person.getVersion() {
         return this.version;
     }
     
-    public void Users.setVersion(Integer version) {
+    public void Person.setVersion(Integer version) {
         this.version = version;
     }
     

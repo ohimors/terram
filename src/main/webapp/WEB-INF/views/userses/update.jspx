@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:update id="fu_com_terram_Users" idField="id_" modelAttribute="users" path="/userses" versionField="Version" z="ydvK9vL8dZ/bMejD3km7OH9t564=">
+        <field:input field="id" id="c_com_terram_Users_id" z="dxN7V3pVoObrmECyGUTLcFHzyUQ="/>
+        <field:input field="username" id="c_com_terram_Users_username" z="5eBqaPO+OymKOeB+lIsWg/fOwMY="/>
+        <field:input field="password" id="c_com_terram_Users_password" z="2/XYP9ruw5wacbPhSzMDH4f4/QE="/>
+        <field:datetime dateTimePattern="${users_lastrevised_date_format}" field="lastRevised" id="c_com_terram_Users_lastRevised" z="PiX39tE87QvQu6/epPcsyDXpKSU="/>
+        <field:input field="lastRevisedBy" id="c_com_terram_Users_lastRevisedBy" z="646OlR5FEbYKoxdLptK57qIgUmA="/>
+    </form:update>
+</div>

@@ -3,8 +3,8 @@
 
 package com.terram;
 
-import com.terram.Calendar;
-import com.terram.CalendarDataOnDemand;
+import com.terram.Address;
+import com.terram.AddressDataOnDemand;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -14,26 +14,20 @@ import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import org.springframework.stereotype.Component;
 
-privileged aspect CalendarDataOnDemand_Roo_DataOnDemand {
+privileged aspect AddressDataOnDemand_Roo_DataOnDemand {
     
-    declare @type: CalendarDataOnDemand: @Component;
+    declare @type: AddressDataOnDemand: @Component;
     
-    private Random CalendarDataOnDemand.rnd = new SecureRandom();
+    private Random AddressDataOnDemand.rnd = new SecureRandom();
     
-    private List<Calendar> CalendarDataOnDemand.data;
+    private List<Address> AddressDataOnDemand.data;
     
-    public Calendar CalendarDataOnDemand.getNewTransientCalendar(int index) {
-        Calendar obj = new Calendar();
-        setId(obj, index);
+    public Address AddressDataOnDemand.getNewTransientAddress(int index) {
+        Address obj = new Address();
         return obj;
     }
     
-    public void CalendarDataOnDemand.setId(Calendar obj, int index) {
-        String id = "id_" + index;
-        obj.setId(id);
-    }
-    
-    public Calendar CalendarDataOnDemand.getSpecificCalendar(int index) {
+    public Address AddressDataOnDemand.getSpecificAddress(int index) {
         init();
         if (index < 0) {
             index = 0;
@@ -41,36 +35,36 @@ privileged aspect CalendarDataOnDemand_Roo_DataOnDemand {
         if (index > (data.size() - 1)) {
             index = data.size() - 1;
         }
-        Calendar obj = data.get(index);
-        Long id = obj.getId_();
-        return Calendar.findCalendar(id);
+        Address obj = data.get(index);
+        Long id = obj.getId();
+        return Address.findAddress(id);
     }
     
-    public Calendar CalendarDataOnDemand.getRandomCalendar() {
+    public Address AddressDataOnDemand.getRandomAddress() {
         init();
-        Calendar obj = data.get(rnd.nextInt(data.size()));
-        Long id = obj.getId_();
-        return Calendar.findCalendar(id);
+        Address obj = data.get(rnd.nextInt(data.size()));
+        Long id = obj.getId();
+        return Address.findAddress(id);
     }
     
-    public boolean CalendarDataOnDemand.modifyCalendar(Calendar obj) {
+    public boolean AddressDataOnDemand.modifyAddress(Address obj) {
         return false;
     }
     
-    public void CalendarDataOnDemand.init() {
+    public void AddressDataOnDemand.init() {
         int from = 0;
         int to = 10;
-        data = Calendar.findCalendarEntries(from, to);
+        data = Address.findAddressEntries(from, to);
         if (data == null) {
-            throw new IllegalStateException("Find entries implementation for 'Calendar' illegally returned null");
+            throw new IllegalStateException("Find entries implementation for 'Address' illegally returned null");
         }
         if (!data.isEmpty()) {
             return;
         }
         
-        data = new ArrayList<Calendar>();
+        data = new ArrayList<Address>();
         for (int i = 0; i < 10; i++) {
-            Calendar obj = getNewTransientCalendar(i);
+            Address obj = getNewTransientAddress(i);
             try {
                 obj.persist();
             } catch (ConstraintViolationException e) {

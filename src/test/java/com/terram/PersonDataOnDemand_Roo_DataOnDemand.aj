@@ -3,8 +3,8 @@
 
 package com.terram;
 
-import com.terram.Calendar;
-import com.terram.CalendarDataOnDemand;
+import com.terram.Person;
+import com.terram.PersonDataOnDemand;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -14,26 +14,20 @@ import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import org.springframework.stereotype.Component;
 
-privileged aspect CalendarDataOnDemand_Roo_DataOnDemand {
+privileged aspect PersonDataOnDemand_Roo_DataOnDemand {
     
-    declare @type: CalendarDataOnDemand: @Component;
+    declare @type: PersonDataOnDemand: @Component;
     
-    private Random CalendarDataOnDemand.rnd = new SecureRandom();
+    private Random PersonDataOnDemand.rnd = new SecureRandom();
     
-    private List<Calendar> CalendarDataOnDemand.data;
+    private List<Person> PersonDataOnDemand.data;
     
-    public Calendar CalendarDataOnDemand.getNewTransientCalendar(int index) {
-        Calendar obj = new Calendar();
-        setId(obj, index);
+    public Person PersonDataOnDemand.getNewTransientPerson(int index) {
+        Person obj = new Person();
         return obj;
     }
     
-    public void CalendarDataOnDemand.setId(Calendar obj, int index) {
-        String id = "id_" + index;
-        obj.setId(id);
-    }
-    
-    public Calendar CalendarDataOnDemand.getSpecificCalendar(int index) {
+    public Person PersonDataOnDemand.getSpecificPerson(int index) {
         init();
         if (index < 0) {
             index = 0;
@@ -41,36 +35,36 @@ privileged aspect CalendarDataOnDemand_Roo_DataOnDemand {
         if (index > (data.size() - 1)) {
             index = data.size() - 1;
         }
-        Calendar obj = data.get(index);
-        Long id = obj.getId_();
-        return Calendar.findCalendar(id);
+        Person obj = data.get(index);
+        Long id = obj.getId();
+        return Person.findPerson(id);
     }
     
-    public Calendar CalendarDataOnDemand.getRandomCalendar() {
+    public Person PersonDataOnDemand.getRandomPerson() {
         init();
-        Calendar obj = data.get(rnd.nextInt(data.size()));
-        Long id = obj.getId_();
-        return Calendar.findCalendar(id);
+        Person obj = data.get(rnd.nextInt(data.size()));
+        Long id = obj.getId();
+        return Person.findPerson(id);
     }
     
-    public boolean CalendarDataOnDemand.modifyCalendar(Calendar obj) {
+    public boolean PersonDataOnDemand.modifyPerson(Person obj) {
         return false;
     }
     
-    public void CalendarDataOnDemand.init() {
+    public void PersonDataOnDemand.init() {
         int from = 0;
         int to = 10;
-        data = Calendar.findCalendarEntries(from, to);
+        data = Person.findPersonEntries(from, to);
         if (data == null) {
-            throw new IllegalStateException("Find entries implementation for 'Calendar' illegally returned null");
+            throw new IllegalStateException("Find entries implementation for 'Person' illegally returned null");
         }
         if (!data.isEmpty()) {
             return;
         }
         
-        data = new ArrayList<Calendar>();
+        data = new ArrayList<Person>();
         for (int i = 0; i < 10; i++) {
-            Calendar obj = getNewTransientCalendar(i);
+            Person obj = getNewTransientPerson(i);
             try {
                 obj.persist();
             } catch (ConstraintViolationException e) {

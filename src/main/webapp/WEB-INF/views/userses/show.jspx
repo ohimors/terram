@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_com_terram_Users" object="${users}" path="/userses" z="CGjdqmcJro/+OY//PshPsaHTBUo=">
+        <field:display field="id" id="s_com_terram_Users_id" object="${users}" z="HyCXCbcG1iHyWahPGPAmCjF2L8E="/>
+        <field:display field="username" id="s_com_terram_Users_username" object="${users}" z="P+YcwoDiH2qH8H2jAEkLX116ues="/>
+        <field:display field="password" id="s_com_terram_Users_password" object="${users}" z="8CiQFmo6gXsXOuhcJLythFJIXek="/>
+        <field:display date="true" dateTimePattern="${users_lastrevised_date_format}" field="lastRevised" id="s_com_terram_Users_lastRevised" object="${users}" z="Dw4h03FJoUFR1ZQ8RZFnbBVsvWw="/>
+        <field:display field="lastRevisedBy" id="s_com_terram_Users_lastRevisedBy" object="${users}" z="p4keyn8mPl4WqjaBsY2CIO9h1gA="/>
+    </page:show>
+</div>
