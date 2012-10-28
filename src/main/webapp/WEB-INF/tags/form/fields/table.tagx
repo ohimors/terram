@@ -147,6 +147,23 @@
                 <spring:message arguments="${typeName}" code="global_menu_new" var="add_message" htmlEscape="false" />
                 <img alt="${fn:escapeXml(add_message)}" src="${create_img_url}" title="${fn:escapeXml(add_message)}" />
               </a>
+              
+              <!-- added for terram -->
+              <c:out value=" | " />
+				<spring:url var="url_theme3" value="">
+				  <spring:param name="theme" value="terram" />
+				  <c:if test="${not empty param.page}">
+				    <spring:param name="page" value="${param.page}" />
+				  </c:if>
+				  <c:if test="${not empty param.size}">
+				    <spring:param name="size" value="${param.size}" />
+				  </c:if>
+				</spring:url>
+				<spring:message code="global_theme_terram" var="theme_terram" />
+				<a href="${url_theme3}" title="${theme_terram}">${theme_terram}</a>
+              <!-- end for terram -->
+              
+              
             </span>
             <c:out value=" " />
           </c:if>

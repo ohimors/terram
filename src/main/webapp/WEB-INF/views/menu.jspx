@@ -8,6 +8,7 @@
         </menu:category>
         <menu:category id="c_controller" z="nj8Dm3hojIyIEyPkwE1UMDIs+K8=">
             <menu:item id="i_controller__publicloginindex_id" messageCode="global_generic" url="/publiclogin/index" z="BbN76bdRXBNAhjBC2T1buSDOq/U="/>
+            <menu:item id="i_controller__registerindex_id" messageCode="global_generic" url="/register/index" z="EurOSeRivV4DP3k7ObRU0Mm4nNw="/>
         </menu:category>
         <menu:category id="c_calendar" z="6hzoERNaGGuqxQSFbgsnk2836BM=">
             <menu:item id="i_calendar_new" messageCode="global_menu_new" url="/calendars?form" z="1s/S2r6Hly9f9fp9NnGGtoZsF1w="/>

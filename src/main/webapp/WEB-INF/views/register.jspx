@@ -8,9 +8,9 @@
       <spring:message code="welcome_h3" arguments="${app_name}" />
     </h3>
     <p>
-      <spring:message code="welcome_text" />
+     
       
-      ok do some stuff.
+      Register page.
     </p>
   </util:panel>
 </div>

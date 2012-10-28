@@ -10,7 +10,7 @@
     <p>
       <spring:message code="welcome_text" />
       
-      ok do some stuff.
+      temp stuff
     </p>
   </util:panel>
 </div>

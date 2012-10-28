@@ -5,6 +5,10 @@
   <definition extends="default" name="index">
     <put-attribute name="body" value="/WEB-INF/views/index.jspx"/>
   </definition>
+  
+  <definition extends="default" name="register">
+    <put-attribute name="body" value="/WEB-INF/views/register.jspx"/>
+  </definition>
 
   <definition extends="public" name="dataAccessFailure">
     <put-attribute name="body" value="/WEB-INF/views/dataAccessFailure.jspx"/>
@@ -16,6 +20,10 @@
 
   <definition extends="public" name="uncaughtException">
     <put-attribute name="body" value="/WEB-INF/views/uncaughtException.jspx"/>
+  </definition>
+  
+  <definition extends="public" name="temp">
+    <put-attribute name="body" value="/WEB-INF/views/temp.jspx"/>
   </definition>
 
 <definition extends="public" name="login">
