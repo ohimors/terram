@@ -12,9 +12,9 @@
   </definition>
   
   <definition name="terram" template="/WEB-INF/layouts/default-terram.jspx">
-    <put-attribute name="header" value="/WEB-INF/views/header-terram.jspx" />
-    <put-attribute name="menu" value="/WEB-INF/views/menu-terram.jspx" />
-    <put-attribute name="footer" value="/WEB-INF/views/footer-terram.jspx" />
+    <put-attribute name="header" value="/WEB-INF/views/terram/header-terram.jspx" />
+    <put-attribute name="menu" value="/WEB-INF/views/terram/menu-terram.jspx" />
+    <put-attribute name="footer" value="/WEB-INF/views/terram/footer-terram.jspx" />
   </definition>
 
   <definition name="public" template="/WEB-INF/layouts/default.jspx">

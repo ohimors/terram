@@ -1,0 +1,185 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+<script type="text/javascript" src="../jQuery/jquery-1.7.2.js"></script>
+<script type="text/javascript" src="ja_core.js" ></script>
+<script type="text/javascript" src="ja_events.js"></script>
+<script type="text/javascript" src="ja_ajax.js"></script>
+<script type="text/javascript" src="ja_cookies.js"></script>
+<script type="text/javascript">
+    var g_obj = null;
+    var $g_obj = null;
+    var g_child = null;
+    var $g_child = null;
+    var testObj = function()
+    {
+    }
+    testObj.prototype =
+    {
+        custom: function()
+        {
+            $.log('testObj custom() running');
+        }
+    }
+
+    var testChild = function(oParent)
+    {
+        this.parentNode = oParent;
+        this.memberVar = 'MemberVar';
+        $(this.parentNode).$bind('custom', this.evt_parent_oncustom, this);
+        this.killProp = false;
+        this.killDefault = false;
+        this.killDefaultAlt = false;
+        this.killImmediate = false;
+    }
+    testChild.prototype =
+    {
+        child: function()
+        {
+            $.log('testChild child() running');
+        },
+        evt_parent_oncustom: function(oEvt)
+        {
+            $.log('parent custom event handler called: this.memberVar = ' + this.memberVar);
+        }
+    }
+
+    function evt_obj_onchild(oEvt)
+    {
+        $.log('testObj child event handler 1 called');
+    }
+
+    function evt_obj_onchildns(oEvt)
+    {
+        $.log('testObj child.nstest event handler 2 called');
+    }
+
+    function evt_obj_oncustom(oEvt)
+    {
+        $.log('testObj custom event handler 1 called');
+    }
+
+    function evt_obj_oncustom2(oEvt)
+    {
+        $.log('testObj custom event handler 2 called');
+    }
+
+    function evt_child_onchild(oEvt)
+    {
+        $.log('testChild child event handler 1 called');
+        if (this.killProp)
+            oEvt.stopPropagation();
+        if (this.killImmediate)
+            oEvt.stopImmediatePropagation();
+        if (this.killDefault)
+            oEvt.preventDefault();
+        else if (this.killDefaultAlt)
+            return false;
+    }
+
+    function evt_child_onchildns(oEvt)
+    {
+        $.log('testChild child.nstest event handler 2 called');
+    }
+
+    function evt_Page_onready(oEvt)
+    {
+        $g_obj = $(g_obj = new testObj());
+        $g_child = $(g_child = new testChild(g_obj));
+        $g_obj.$bind('custom', evt_obj_oncustom);
+        $g_obj.$bind('custom', evt_obj_oncustom2);
+        $g_obj.$bind('child', evt_obj_onchild);
+        $g_obj.$bind('child.nstest', evt_obj_onchildns);
+        $g_child.$bind('child', evt_child_onchild);
+        $g_child.$bind('child.nstest', evt_child_onchildns);
+        $('#idBtn_One').$bind('click', doTestOne);
+        $('#idBtn_Two').$bind('click', doTestTwo);
+        $('#idBtn_Three').$bind('click', doTestThree);
+        $('#idBtn_Four').$bind('click', doTestFour);
+        $('#idBtn_Five').$bind('click', doTestFive);
+        $('#idBtn_Six').$bind('click', doTestSix);
+        $('#idBtn_Seven').$bind('click', doTestSeven);
+
+        var oAJAX = $.jajax('url', 100, true);
+    }
+
+    function doTestOne(oEvt)
+    {
+        $.log('$g_obj.$trigger("custom", oEvt) [Base test]');
+        $.log('Expected: 1) testChild member handler, 2) testObj oncustom handler 1, 3) testObj oncustom handler 2, 4) testObj.custom() method');
+        $g_obj.$trigger('custom', oEvt);
+    }
+
+    function clearChild()
+    {
+        g_child.killProp = g_child.killDefault = g_child.killDefaultAlt = g_child.killImmediate = false;
+    }
+
+    function doTestTwo(oEvt)
+    {
+        $.log('$g_child.$trigger("child", { testProp: "testProp"}) [Full Propagation test]');
+        $.log('Expected: 1) testChild onchild handler, 2) testChild onchild.nstest handler, 3) testObj onchild handler, 4) testObj onchild.nstest handler, 5) testChild.child() method');
+        clearChild();
+        $g_child.$trigger('child', { testProp: 'testProp' });
+    }
+
+    function doTestThree(oEvt)
+    {
+        $.log('$g_child.$trigger("child") -> preventDefault() test');
+        $.log('Expected: 1) testChild onchild handler, 2) testchild onchild.nstest handler, 3) testObj onchild handler, 4) testObj onchild.nstest handler');
+        clearChild();
+        g_child.killDefault = true;
+        $g_child.$trigger('child');
+    }
+
+    function doTestFour(oEvt)
+    {
+        $.log('$g_child.$trigger("child", new $.Event(oEvt, { jqTest: "jqTest" })) -> stopPropagation() test');
+        $.log('Expected: 1) testChild onchild handler, 2) testchild onchild.nstest handler 3) testChild.child() method');
+        clearChild();
+        g_child.killProp = true;
+        $g_child.$trigger('child', new $.Event(oEvt, { jqTest: 'jqTest' }));
+    }
+
+    function doTestFive(oEvt)
+    {
+        $.log('$g_child.$trigger("child") -> stopImmediatePropagation() test');
+        $.log('Expected: 1) testchild onchild handler, 2) testChild.child() method');
+        clearChild();
+        g_child.killImmediate = true;
+        $g_child.$trigger('child');
+    }
+
+    function doTestSix(oEvt)
+    {
+        $.log('$g_child.$trigger("child") -> return false test');
+        $.log('Expected: 1) testChild onchild handler, 2) testChild.onchild.nstest handler');
+        clearChild();
+        g_child.killDefaultAlt = true;
+        $g_child.$trigger('child');
+    }
+
+    function doTestSeven(oEvt)
+    {
+        $.log('$g_child.$trigger("child.nstest") -> namespace test');
+        $.log('Expected: 1) testChild onchild.nstest handler, 2) testObj onchild.nstest handler');
+        clearChild();
+        $g_child.$trigger('child.nstest');
+    }
+
+    $(document).ready(evt_Page_onready);
+
+</script>
+</head>
+<body>
+<div><input id="idBtn_One" type="button" value="One"/></div>
+<div><input id="idBtn_Two" type="button" value="Two"/></div>
+<div><input id="idBtn_Three" type="button" value="Three"/></div>
+<div><input id="idBtn_Four" type="button" value="Four"/></div>
+<div><input id="idBtn_Five" type="button" value="Five"/></div>
+<div><input id="idBtn_Six" type="button" value="Six"/></div>
+<div><input id="idBtn_Seven" type="button" value="Seven" /></div>
+</body>
+</html>

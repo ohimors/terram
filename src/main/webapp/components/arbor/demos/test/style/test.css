@@ -1,0 +1,31 @@
+body
+{
+    overflow:hidden;
+}
+
+div.canvas
+{
+    width:800px;
+    height:600px;
+    position: relative;
+    margin-top:200px;
+    margin-left:500px;
+}
+
+div.floater
+{
+	border: 1px solid #000;
+	background-color: #0f0;
+	position: absolute;
+	height: 100px;
+	width: 200px;
+	border-radius: 6px;
+}
+
+div.diag
+{
+	background-color: #000;
+	height: 1px;
+	position: absolute;
+	z-index:-1;
+}

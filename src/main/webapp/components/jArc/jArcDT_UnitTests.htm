@@ -1,0 +1,226 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+<script type="text/javascript" src="../jQuery/jquery-1.7.2.js"></script>
+<script type="text/javascript" src="ja_core.js" ></script>
+<script type="text/javascript" src="ja_datetime.js"></script>
+<script type="text/javascript">
+    function evt_Page_onload(oEvt)
+    {
+        $.log("--- Run Basic comparisons on DateTime vs. Date for today ---");
+        var today = new Date();
+        RunBasicToStringTests(today, new DateTime(today.getTime()));
+
+        $.log("--- Run Basic + Advanced comparison on DateTime vs. Date for 01/01/2000 ---");
+        var date = new Date(2000, 0, 1, 0, 0, 0, 0);
+        var dt = new DateTime(2000, 0, 1, 0, 0, 0, 0);
+        RunBasicToStringTests(date, dt);
+        RunAdvancedToStringTests(dt, "2000-01-01", "00:00:00", "2000-01-01", $.strPad(date.getUTCHours(), 2, "0") + ":00:00", ".0", ".000", date.getTimezoneOffset());
+
+        // Parse Format Tests
+        // - Create a complex formatting string
+        // - Create a complex date string which conforms to that format
+        // - Create a Date object representing the same date represented in the date string (in local time)
+        // - Parse the date string into a DateTime object and verify is passes basic + advanced comparison tests with the Date object
+        // - Take the parsed DateTime object and attempt to format it back into a date string using the same formatting string
+        // - Verify the resulting formatted string is the same as the original parsed string
+        //      - In some cases, since there's only 2 Timezone options for output, the result string will need to be compared to a manually constructed expected string
+
+        $.log("--- Parse + Format Test 1 ---");
+        RunParseFormatTest(new Date(2012, 0, 2, 13, 1, 1, 1), "126,Monday,!,!01?66161616001*PM@-0800", "yy6,dddd,!,!ww?66h6m6s6f*TT'@'zzzz", "1");
+
+        $.log("--- Parse + Format Test 2 ---");
+        RunParseFormatTest(new Date(2012, 0, 10, 2, 22, 22, 220), "2012-dDfh'()(Tue)'%#2=2222222222aamm--088", "yyy'-dDfh''()('ddd')''%#'w'='H'2'mm'2'ss'2'ff'a'tt'm-'zz8", "2");
+
+        $.log("--- Parse + Format Test 3 ---");
+        RunParseFormatTest(new Date(2012, 1, 1, 19, 7), "20120320707PPST", "yyyyDDhhmmTZZZZ", "3");
+
+        $.log("--- Parse + Format Test 4 ---");
+        RunParseFormatTest(new Date(2012, 0, 4, 3, 7), "XX4X2012X11X07XaXUT", "XXDXyXHHXmmXtX'UT'", "4");
+
+        $.log("--- Parse + Format Test 5 ---");
+        date = new Date(1984, 3, 17, 2, 30, 0, 123);
+        var sFormat = "MMMM o, yyyy - HH:mm:ss.fff zzz";
+        RunParseFormatTest(date, "April 17th, 1984 - 05:30:00.123 -04:00", sFormat, "5", new DateTime(date).format(sFormat));
+
+        $.log("--- Parse + Format Test 6 ---");
+        sFormat = "MMM dd yyyy hh:mm:ss.f TT Z";
+        date = new Date(1984, 3, 17, 2, 30, 0, 123);
+        RunParseFormatTest(date, "Apr 17 1984 05:30:00.123 AM EDT", sFormat, "6", new DateTime(date).format(sFormat));
+
+        $.log("--- Parse + Format Test 7 ---");
+        RunParseFormatTest(new Date(1984, 3, 7, 11), "4/7/84 11:00 am PDT", "M/d/yy hh:mm tt ZZZ", "7");
+    }
+
+    function RunParseFormatTest(oDate, toParse, sFormat, strTestID, compareStr)
+    {
+        var localDate = "{0}-{1}-{2}".format(oDate.getFullYear(), $.strPad((oDate.getMonth() + 1), 2, '0'), $.strPad(oDate.getDate(), 2, '0'));
+        var localTime = "{0}:{1}:{2}".format($.strPad(oDate.getHours(), 2, '0'), $.strPad(oDate.getMinutes(), 2, '0'), $.strPad(oDate.getSeconds(), 2, '0'));
+        var utcDate = "{0}-{1}-{2}".format(oDate.getUTCFullYear(), $.strPad((oDate.getUTCMonth() + 1), 2, '0'), $.strPad(oDate.getUTCDate(), 2, '0'));
+        var utcTime = "{0}:{1}:{2}".format($.strPad(oDate.getUTCHours(), 2, '0'), $.strPad(oDate.getUTCMinutes(), 2, '0'), $.strPad(oDate.getUTCSeconds(), 2, '0'));
+        var ms = (oDate.getMilliseconds() / 1000).toString();
+        var msShort = (ms == "0") ? ".0" : ms.substr(ms.find('.'));
+        var msLong = (ms == "0") ? ".000" : $.strPad(ms.substr(ms.find('.')), 4, '0', true);
+
+        oDateTime = DateTime.parse(toParse, sFormat);
+        if (!exists(oDateTime))
+        {
+            $.log("Complex Parse Test " + strTestID + " FAILED");
+            $.log("Format: " + sFormat + " | String: " + toParse);
+        }
+        else
+        {
+            RunBasicToStringTests(oDate, oDateTime);
+            RunAdvancedToStringTests(oDateTime, localDate, localTime, utcDate, utcTime, msShort, msLong, oDate.getTimezoneOffset());
+            var resultStr = oDateTime.format(sFormat);
+            if ((compareStr || toParse) != resultStr)
+            {
+                $.log("Complex Format Test " + strTestID + " FAILED");
+                $.log("Format: " + sFormat + " | String: " + toParse + " Formatted Result: " + resultStr);
+            }
+        }
+    }
+
+    function RunBasicToStringTests(oDate, oDateTime)
+    {
+        var iSuccess = 13,
+            iCount = 13;
+        var sJSON = oDate.toJSON();
+        var sISO = oDate.toISOString();
+        var sUTC = oDate.toUTCString();
+        var sLoc = oDate.toLocaleString();
+        if (oDateTime.format('@') != oDate.getTime().toString())
+        {
+            $.log("Timestamp ('@') Test FAILED");
+            $.log(oDateTime.format('@') + ' != ' + oDate.getTime().toString());
+            iSuccess--;
+        }
+        if (oDateTime.toString('j') != sJSON)
+        {
+            $.log("toString('j') Test FAILED");
+            $.log(oDateTime.toString('j') + ' != ' + sJSON);
+            iSuccess--;
+        }
+        if (oDateTime.toString('J') != sJSON)
+        {
+            $.log("toString('J') Test FAILED");
+            $.log(oDateTime.toString('J') + ' != ' + sJSON);
+            iSuccess--;
+        }
+        if (oDateTime.toString('i') != sISO)
+        {
+            $.log("toString('i') Test FAILED");
+            $.log(oDateTime.toString('i') + ' != ' + sISO);
+            iSuccess--;
+        }
+        if (oDateTime.toString('I') != sISO)
+        {
+            $.log("toString('I') Test FAILED");
+            $.log(oDateTime.toString('I') + ' != ' + sISO);
+            iSuccess--;
+        }
+        if (oDateTime.toString('r') != sUTC)
+        {
+            $.log("toString('r') Test FAILED");
+            $.log(oDateTime.toString('r') + ' != ' + sUTC);
+            iSuccess--;
+        }
+        if (oDateTime.toString('R') != sUTC)
+        {
+            $.log("toString('R') Test FAILED");
+            $.log(oDateTime.toString('R') + ' != ' + sUTC);
+            iSuccess--;
+        }
+        if (oDateTime.toString('d') != oDate.toDateString())
+        {
+            $.log("toString('d') Test FAILED");
+            $.log(oDateTime.toString('d') + ' != ' + oDate.toDateString());
+            iSuccess--;
+        }
+        if (oDateTime.toString('D') != oDate.toLocaleDateString())
+        {
+            $.log("toString('D') Test FAILED");
+            $.log(oDateTime.toString('D') + ' != ' + oDate.toLocaleDateString());
+            iSuccess--;
+        }
+        if (oDateTime.toString('t') != oDate.toTimeString())
+        {
+            $.log("toString('t') Test FAILED");
+            $.log(oDateTime.toString('t') + ' != ' + oDate.toTimeString());
+            iSuccess--;
+        }
+        if (oDateTime.toString('T') != oDate.toLocaleTimeString())
+        {
+            $.log("toString('T') Test FAILED");
+            $.log(oDateTime.toString('T') + ' != ' + oDate.toLocaleTimeString());
+            iSuccess--;
+        }
+        if (oDateTime.toString('l') != sLoc)
+        {
+            $.log("toString('l') Test FAILED");
+            $.log(oDateTime.toString('l') + ' != ' + sLoc);
+            iSuccess--;
+        }
+        if (oDateTime.toString('L') != sLoc)
+        {
+            $.log("toString('L') Test FAILED");
+            $.log(oDateTime.toString('L') + ' != ' + sLoc);
+            iSuccess--;
+        }
+        $.log(iSuccess + ' out of ' + iCount + ' Basic toString() tests succeeded');
+    }
+
+    function RunAdvancedToStringTests(oDateTime, localDate, localTime, utcDate, utcTime, sOptMS, sReqMS, offSet)
+    {
+        var iSuccess = 6,
+            iCount = 6;
+        var uStr = utcDate + 'T' + utcTime + (sOptMS || '');
+        if (oDateTime.toString('u') != (uStr + 'Z'))
+        {
+            $.log("toString('u') Test FAILED");
+            $.log(oDateTime.toString('u') + ' != ' + uStr + 'Z');
+            iSuccess--;
+        }
+        if (oDateTime.toString('U') != uStr)
+        {
+            $.log("toString('U') Test FAILED");
+            $.log(oDateTime.toString('U') + ' != ' + uStr);
+            iSuccess--;
+        }
+        if (oDateTime.toString('s') != (utcDate + 'T' + utcTime))
+        {
+            $.log("toString('s') Test FAILED");
+            $.log(oDateTime.toString('s') + ' != ' + (utcDate + 'T' + utcTime));
+            iSuccess--;
+        }
+        if (oDateTime.toString('S') != (utcDate + ' ' + utcTime + 'Z'))
+        {
+            $.log("toString('S') Test FAILED");
+            $.log(oDateTime.toString('S') + ' != ' + (utcDate + ' ' + utcTime + 'Z'));
+            iSuccess--;
+        }
+        var oStr = localDate + 'T' + localTime + sReqMS + (offSet < 0 ? '+' : '-') + $.strPad(Math.abs(Math.floor(offSet / 60)), 2, '0');
+        if (oDateTime.toString('o') != oStr)
+        {
+            $.log("toString('o') Test FAILED");
+            $.log(oDateTime.toString('o') + ' != ' + oStr);
+            iSuccess--;
+        }
+        if (oDateTime.toString('O') != oStr)
+        {
+            $.log("toString('O') Test FAILED");
+            $.log(oDateTime.toString('O') + ' != ' + oStr);
+            iSuccess--;
+        }
+        $.log(iSuccess + ' out of ' + iCount + ' Advanced toString() tests succeeded');
+    }
+
+    $('body').ready(evt_Page_onload);
+</script>
+</head>
+<body>
+
+</body>
+</html>
