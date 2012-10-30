@@ -13,7 +13,7 @@
   <link href="${tundra_url}" rel="stylesheet" type="text/css"/>
   <link href="${roo_css_url}" media="screen" rel="stylesheet" type="text/css"/>  
   <link href="${favicon}" rel="SHORTCUT ICON"/>
-  <link href="resources/components/bootstrap/css/bootstrap.css" rel="stylesheet"/> -->
+  <link href="resources/components/bootstrap/css/bootstrap.css" rel="stylesheet"/>
   <link href="resources/components/bootstrap/css/bootstrap-responsive.css" rel="stylesheet"/>
   
   <!-- Get the user local from the page context (it was set by Spring MVC's locale resolver) -->
