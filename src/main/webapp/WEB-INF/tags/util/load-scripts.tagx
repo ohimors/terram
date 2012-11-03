@@ -41,6 +41,9 @@
     </script>
 
 <spring:url value="/components/bootstrap/js/bootstrap.js" var="bootstrap_url"/>
+   <script src="${bootstrap_url}" type="text/javascript">
+        <!--required for FF3 and Opera-->
+    </script>
 <spring:url value="/components/jArc/ja_core.js" var="jArc_url"/>
     
 </jsp:root>
