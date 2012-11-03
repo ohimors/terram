@@ -35,7 +35,7 @@
     </script>
   <script language="JavaScript" type="text/javascript">dojo.require("dojo.parser");</script>
 
-<spring:url value="/js/jquery-1.8.0.min.js" var="jquery_url"/>
+<spring:url value="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js" var="jquery_url"/>
     <script src="${jquery_url}" type="text/javascript">
         <!--required for FF3 and Opera-->
     </script>
@@ -45,5 +45,10 @@
         <!--required for FF3 and Opera-->
     </script>
 <spring:url value="/components/jArc/ja_core.js" var="jArc_url"/>
+
+<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
     
 </jsp:root>
