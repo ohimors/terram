@@ -6,10 +6,7 @@
   <spring:url var="slide01" value="/resources/images/slide-01.jpg" />
   <spring:url var="slide02" value="/resources/images/slide-02.jpg" />
   <spring:url var="slide03" value="/resources/images/slide-03.jpg" />
-    <h3>
-      <spring:message code="welcome_h3" arguments="${app_name}" />
-    </h3>
-    
+ 
       <!-- Carousel
     ================================================== -->
     <div id="myCarousel" class="carousel slide">
