@@ -2,6 +2,12 @@
   <jsp:directive.page contentType="text/html;charset=UTF-8" />
   <jsp:output omit-xml-declaration="yes" />
   <spring:message var="app_name" code="application_name" htmlEscape="false" />
+  <spring:message var="carousel_header1" code="carousel_header1" htmlEscape="false" />
+  <spring:message var="carousel_header2" code="carousel_header2" htmlEscape="false" />
+  <spring:message var="carousel_header3" code="carousel_header3" htmlEscape="false" />
+  <spring:message var="carousel_description1" code="carousel_description1" htmlEscape="false" />
+  <spring:message var="carousel_description2" code="carousel_description2" htmlEscape="false" />
+  <spring:message var="carousel_description3" code="carousel_description3" htmlEscape="false" />
   <spring:message var="title" code="welcome_titlepane" arguments="${app_name}" htmlEscape="false" />
   <spring:url var="slide01" value="/resources/images/slide-01.jpg" />
   <spring:url var="slide02" value="/resources/images/slide-02.jpg" />
@@ -15,8 +21,8 @@
           <img src="${slide01}" alt=""/>
           <div class="container">
             <div class="carousel-caption">
-              <h1>Example headline.</h1>
-              <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+              <h1>${carousel_header1}</h1>
+              <p class="lead">${carousel_description1}</p>
               <a class="btn btn-large btn-primary" href="#">Sign up today</a>
             </div>
           </div>
@@ -25,8 +31,8 @@
           <img src="${slide02}" alt=""/>
           <div class="container">
             <div class="carousel-caption">
-              <h1>Another example headline.</h1>
-              <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+              <h1>${carousel_header2}</h1>
+              <p class="lead">${carousel_description2}</p>
               <a class="btn btn-large btn-primary" href="#">Learn more</a>
             </div>
           </div>
@@ -35,15 +41,15 @@
           <img src="${slide03}" alt=""/>
           <div class="container">
             <div class="carousel-caption">
-              <h1>One more for good measure.</h1>
-              <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+              <h1>${carousel_header3}</h1>
+              <p class="lead">${carousel_description3}</p>
               <a class="btn btn-large btn-primary" href="#">Browse gallery</a>
             </div>
           </div>
         </div>
       </div>
-       <a class="left carousel-control" href="#myCarousel" data-slide="prev">b</a>
-      <a class="right carousel-control" href="#myCarousel" data-slide="next">a</a> 
+       <a class="left carousel-control" href="#myCarousel" data-slide="prev">&amp;lsaquo;</a>
+      <a class="right carousel-control" href="#myCarousel" data-slide="next">&amp;rsaquo;</a> 
     </div><!-- /.carousel -->
     
     
@@ -59,14 +65,9 @@ $(document).ready(function(){
   </script>
   
    <script>
-   
-   
-          // carousel demo
-        
-           
-           $('#myCarousel').carousel({
-  				interval: 2000
-			})
- 
+        // carousel demo
+$('#myCarousel').carousel({
+	interval: 6000
+})
     </script>
 </div>
