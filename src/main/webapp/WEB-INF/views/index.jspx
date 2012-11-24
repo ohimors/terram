@@ -57,7 +57,12 @@
       <spring:message code="welcome_text" />
       
       ok do some stuff.
+      
+      
+      
     </p>
+  
+  
   <script>
 $(document).ready(function(){
 		//alert("ok");

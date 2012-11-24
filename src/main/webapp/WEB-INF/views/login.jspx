@@ -2,7 +2,7 @@
   <jsp:directive.page contentType="text/html;charset=UTF-8" />
   <jsp:output omit-xml-declaration="yes" />
   <spring:message code="security_login_title" var="title" htmlEscape="false" />
-  <util:panel id="title" title="${title}">
+  
     <c:if test="${not empty param.login_error}">
       <div class="errors">
         <p>
@@ -55,6 +55,6 @@
         <input id="reset" type="reset" value="${fn:escapeXml(reset_label)}" />
       </div>
     </form>
-  </util:panel>
+  
 </div>
 

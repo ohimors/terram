@@ -1,3 +1,32 @@
 .test{
 	color:red;
 }
+
+
+/*login page */
+#login-container{
+	position:absolute;
+	z-index: 1000;
+	top: 300px;
+	right:300px;
+	min-height: 200px;
+	max-height: 200px;
+	min-width: 500px;
+	max-width:500px;
+	border-radius: 6px;
+	
+background-image: linear-gradient(bottom, rgb(186,189,209) 20%, rgb(124,166,160) 88%);
+background-image: -o-linear-gradient(bottom, rgb(186,189,209) 20%, rgb(124,166,160) 88%);
+background-image: -moz-linear-gradient(bottom, rgb(186,189,209) 20%, rgb(124,166,160) 88%);
+background-image: -webkit-linear-gradient(bottom, rgb(186,189,209) 20%, rgb(124,166,160) 88%);
+background-image: -ms-linear-gradient(bottom, rgb(186,189,209) 20%, rgb(124,166,160) 88%);
+
+background-image: -webkit-gradient(
+	linear,
+	left bottom,
+	left top,
+	color-stop(0.2, rgb(186,189,209)),
+	color-stop(0.88, rgb(124,166,160))
+);	
+}
+
