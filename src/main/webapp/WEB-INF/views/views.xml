@@ -5,6 +5,7 @@
   <definition extends="terram" name="index">
     <put-attribute name="body" value="/WEB-INF/views/index.jspx"/>
   </definition>
+
   
   <definition extends="default" name="register">
     <put-attribute name="body" value="/WEB-INF/views/register.jspx"/>
@@ -17,12 +18,20 @@
   <definition extends="public" name="resourceNotFound">
     <put-attribute name="body" value="/WEB-INF/views/resourceNotFound.jspx"/>
   </definition>
+  
+   <definition extends="public" name="authorizationError">
+    <put-attribute name="body" value="/WEB-INF/views/authorizationError.jspx"/>
+  </definition>
 
   <definition extends="public" name="uncaughtException">
     <put-attribute name="body" value="/WEB-INF/views/uncaughtException.jspx"/>
   </definition>
   
   <definition extends="terram" name="temp">
+    <put-attribute name="body" value="/WEB-INF/views/temp.jspx"/>
+  </definition>
+  
+  <definition extends="terram" name="loginfailed">
     <put-attribute name="body" value="/WEB-INF/views/temp.jspx"/>
   </definition>
 

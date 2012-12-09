@@ -6,16 +6,13 @@ import org.springframework.roo.addon.tostring.RooToString;
 
 @RooJavaBean
 @RooToString
-@RooJpaActiveRecord(finders = { "findUsersesByIdEquals", "findUsersesByUsernameEquals" })
-public class Users {
+@RooJpaActiveRecord
+public class UserRoles {
+
+    private Integer userRolesId;
 
     private Integer userId;
 
-    private String username;
-
-    private String password;
-
-    private Boolean enabled;
-
-    
+    private String authority;
+   
 }

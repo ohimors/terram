@@ -4,16 +4,15 @@
 package com.terram;
 
 import com.terram.Users;
-import java.util.Date;
 
 privileged aspect Users_Roo_JavaBean {
     
-    public String Users.getId() {
-        return this.id;
+    public Integer Users.getUserId() {
+        return this.userId;
     }
     
-    public void Users.setId(String id) {
-        this.id = id;
+    public void Users.setUserId(Integer userId) {
+        this.userId = userId;
     }
     
     public String Users.getUsername() {
@@ -32,20 +31,12 @@ privileged aspect Users_Roo_JavaBean {
         this.password = password;
     }
     
-    public Date Users.getLastRevised() {
-        return this.lastRevised;
+    public Boolean Users.getEnabled() {
+        return this.enabled;
     }
     
-    public void Users.setLastRevised(Date lastRevised) {
-        this.lastRevised = lastRevised;
-    }
-    
-    public String Users.getLastRevisedBy() {
-        return this.lastRevisedBy;
-    }
-    
-    public void Users.setLastRevisedBy(String lastRevisedBy) {
-        this.lastRevisedBy = lastRevisedBy;
+    public void Users.setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
     
 }

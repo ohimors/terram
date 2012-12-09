@@ -10,7 +10,7 @@
     <p>
       <spring:message code="welcome_text" />
       
-      <div class="test">temp stuff</div>
+      <div class="test">temp stuff or login failed</div>
     </p>
   </util:panel>
 </div>

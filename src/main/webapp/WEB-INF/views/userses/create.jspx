@@ -3,11 +3,10 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <form:create id="fc_com_terram_Users" modelAttribute="users" path="/userses" render="${empty dependencies}" z="XRK18fHlAOC9gPRaBl0AwaRLhOo=">
-        <field:input field="id" id="c_com_terram_Users_id" z="dxN7V3pVoObrmECyGUTLcFHzyUQ="/>
         <field:input field="username" id="c_com_terram_Users_username" z="5eBqaPO+OymKOeB+lIsWg/fOwMY="/>
         <field:input field="password" id="c_com_terram_Users_password" z="2/XYP9ruw5wacbPhSzMDH4f4/QE="/>
-        <field:datetime dateTimePattern="${users_lastrevised_date_format}" field="lastRevised" id="c_com_terram_Users_lastRevised" z="PiX39tE87QvQu6/epPcsyDXpKSU="/>
-        <field:input field="lastRevisedBy" id="c_com_terram_Users_lastRevisedBy" z="646OlR5FEbYKoxdLptK57qIgUmA="/>
+        <field:checkbox field="enabled" id="c_com_terram_Users_enabled" z="rDXAZ5wLYYSAC5hSJpaMYciCyZI="/>
+        <field:input field="userId" id="c_com_terram_Users_userId" validationMessageCode="field_invalid_integer" z="I1HH9G8qgfzre+Kg9kKXac+WlR0="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_com_terram_Users" render="${not empty dependencies}" z="byRnd79E+oqFEjvgpL9X0Yq7J2Q="/>
 </div>

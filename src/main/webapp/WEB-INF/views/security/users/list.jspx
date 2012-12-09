@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_com_terram_model_security_Principal" items="${principals}" z="uGQlUlaHoPihq1yowyL29mKkkko=">
+        <table:table data="${principals}" id="l_com_terram_model_security_Principal" path="/security/users" z="yFoVnLEbq+04wfnweKIc57aNZ4g=">
+            <table:column id="c_com_terram_model_security_Principal_username" property="username" z="LzD7EtzSTmZcOY8wqa/KCKJSkg0="/>
+            <table:column id="c_com_terram_model_security_Principal_password" property="password" z="1bdjKB6NChX9w9zB1PSZUcOHjIM="/>
+            <table:column id="c_com_terram_model_security_Principal_enabled" property="enabled" z="qZnZeOF6wC1KpWAi9BQ95AxDvts="/>
+        </table:table>
+    </page:list>
+</div>

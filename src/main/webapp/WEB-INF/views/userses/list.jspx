@@ -3,12 +3,11 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <page:list id="pl_com_terram_Users" items="${userses}" z="xN9EBAuTGtzX3oB9xdFFxZPp+lY=">
-        <table:table data="${userses}" id="l_com_terram_Users" path="/userses" typeIdFieldName="id_" z="zrDcPaNIA2qE4LgWzXF8+U86/wo=">
-            <table:column id="c_com_terram_Users_id" property="id" z="3o1EAAAxQDPjtChd7oVqgeiYito="/>
+        <table:table data="${userses}" id="l_com_terram_Users" path="/userses" z="Ycr3xVvoy1lyIqK7pqaOzyWry+c=">
             <table:column id="c_com_terram_Users_username" property="username" z="t5eHVsX/g4sWlwE842DGi6z6wx4="/>
             <table:column id="c_com_terram_Users_password" property="password" z="HhRKF8qyglR0SmJuzI6uF16nCgs="/>
-            <table:column date="true" dateTimePattern="${users_lastrevised_date_format}" id="c_com_terram_Users_lastRevised" property="lastRevised" z="owKJ/joo16sPcB4A4vz6LgmCMlY="/>
-            <table:column id="c_com_terram_Users_lastRevisedBy" property="lastRevisedBy" z="nq/jvCff3Mn8Xrl4o1upXcqi3Es="/>
+            <table:column id="c_com_terram_Users_enabled" property="enabled" z="hpZetIG+FvfnBGhGGf/56Cwkiac="/>
+            <table:column id="c_com_terram_Users_userId" property="userId" z="fpfi71XPf9ucUbREPP32We3WAxk="/>
         </table:table>
     </page:list>
 </div>

@@ -3,8 +3,8 @@
 
 package com.terram;
 
-import com.terram.Users;
-import com.terram.UsersDataOnDemand;
+import com.terram.UserRoles;
+import com.terram.UserRolesDataOnDemand;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -14,44 +14,38 @@ import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import org.springframework.stereotype.Component;
 
-privileged aspect UsersDataOnDemand_Roo_DataOnDemand {
+privileged aspect UserRolesDataOnDemand_Roo_DataOnDemand {
     
-    declare @type: UsersDataOnDemand: @Component;
+    declare @type: UserRolesDataOnDemand: @Component;
     
-    private Random UsersDataOnDemand.rnd = new SecureRandom();
+    private Random UserRolesDataOnDemand.rnd = new SecureRandom();
     
-    private List<Users> UsersDataOnDemand.data;
+    private List<UserRoles> UserRolesDataOnDemand.data;
     
-    public Users UsersDataOnDemand.getNewTransientUsers(int index) {
-        Users obj = new Users();
-        setEnabled(obj, index);
-        setPassword(obj, index);
+    public UserRoles UserRolesDataOnDemand.getNewTransientUserRoles(int index) {
+        UserRoles obj = new UserRoles();
+        setAuthority(obj, index);
         setUserId(obj, index);
-        setUsername(obj, index);
+        setUserRolesId(obj, index);
         return obj;
     }
     
-    public void UsersDataOnDemand.setEnabled(Users obj, int index) {
-        Boolean enabled = Boolean.TRUE;
-        obj.setEnabled(enabled);
+    public void UserRolesDataOnDemand.setAuthority(UserRoles obj, int index) {
+        String authority = "authority_" + index;
+        obj.setAuthority(authority);
     }
     
-    public void UsersDataOnDemand.setPassword(Users obj, int index) {
-        String password = "password_" + index;
-        obj.setPassword(password);
-    }
-    
-    public void UsersDataOnDemand.setUserId(Users obj, int index) {
+    public void UserRolesDataOnDemand.setUserId(UserRoles obj, int index) {
         Integer userId = new Integer(index);
         obj.setUserId(userId);
     }
     
-    public void UsersDataOnDemand.setUsername(Users obj, int index) {
-        String username = "username_" + index;
-        obj.setUsername(username);
+    public void UserRolesDataOnDemand.setUserRolesId(UserRoles obj, int index) {
+        Integer userRolesId = new Integer(index);
+        obj.setUserRolesId(userRolesId);
     }
     
-    public Users UsersDataOnDemand.getSpecificUsers(int index) {
+    public UserRoles UserRolesDataOnDemand.getSpecificUserRoles(int index) {
         init();
         if (index < 0) {
             index = 0;
@@ -59,36 +53,36 @@ privileged aspect UsersDataOnDemand_Roo_DataOnDemand {
         if (index > (data.size() - 1)) {
             index = data.size() - 1;
         }
-        Users obj = data.get(index);
+        UserRoles obj = data.get(index);
         Long id = obj.getId();
-        return Users.findUsers(id);
+        return UserRoles.findUserRoles(id);
     }
     
-    public Users UsersDataOnDemand.getRandomUsers() {
+    public UserRoles UserRolesDataOnDemand.getRandomUserRoles() {
         init();
-        Users obj = data.get(rnd.nextInt(data.size()));
+        UserRoles obj = data.get(rnd.nextInt(data.size()));
         Long id = obj.getId();
-        return Users.findUsers(id);
+        return UserRoles.findUserRoles(id);
     }
     
-    public boolean UsersDataOnDemand.modifyUsers(Users obj) {
+    public boolean UserRolesDataOnDemand.modifyUserRoles(UserRoles obj) {
         return false;
     }
     
-    public void UsersDataOnDemand.init() {
+    public void UserRolesDataOnDemand.init() {
         int from = 0;
         int to = 10;
-        data = Users.findUsersEntries(from, to);
+        data = UserRoles.findUserRolesEntries(from, to);
         if (data == null) {
-            throw new IllegalStateException("Find entries implementation for 'Users' illegally returned null");
+            throw new IllegalStateException("Find entries implementation for 'UserRoles' illegally returned null");
         }
         if (!data.isEmpty()) {
             return;
         }
         
-        data = new ArrayList<Users>();
+        data = new ArrayList<UserRoles>();
         for (int i = 0; i < 10; i++) {
-            Users obj = getNewTransientUsers(i);
+            UserRoles obj = getNewTransientUserRoles(i);
             try {
                 obj.persist();
             } catch (ConstraintViolationException e) {

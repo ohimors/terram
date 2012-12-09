@@ -6,25 +6,49 @@
         http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
     <!-- HTTP security configurations -->
     <http auto-config="true" use-expressions="true">
-        <!-- <form-login login-processing-url="/resources/j_spring_security_check" login-page="/login" authentication-failure-url="/login?login_error=t" /> -->
-        <form-login login-processing-url="/resources/j_spring_security_check" login-page="/" authentication-failure-url="/?login_error=t" />
+    
+    	<intercept-url pattern="/private/welcome*" access="ROLE_USER" />
+        <!-- <form-login login-processing-url="/resources/j_spring_security_check" login-page="/" authentication-failure-url="/?login_error=t" />-->
+        <form-login login-page="/" default-target-url="/" authentication-failure-url="/authorizationError" />
         <logout logout-url="/resources/j_spring_security_logout" />
         <!-- Configure these elements to secure URIs in your application -->
         <intercept-url pattern="/choices/**" access="hasRole('ROLE_ADMIN')" />
         <intercept-url pattern="/member/**" access="isAuthenticated()" />
+        <intercept-url pattern="/private/**" access="isAuthenticated()" />
+        <intercept-url pattern="/security/**" access="permitAll" />
         <intercept-url pattern="/resources/**" access="permitAll" />
         <intercept-url pattern="/**" access="permitAll" />
     </http>
     <!-- Configure Authentication mechanism -->
     <authentication-manager alias="authenticationManager">
+    
+    <!-- database backed user authentication  -->
+    <authentication-provider>
+    <!-- 	<password-encoder hash="sha-256" > -->
+        	<!-- <salt-source user-property="username"/> This was messing up login for some reason FIXME!.--> 
+    	<!-- </password-encoder> -->
+  		<jdbc-user-service data-source-ref="dataSource"  users-by-username-query="select username,password, enabled from users where username=?"  
+ 		   					 authorities-by-username-query="
+		      select u.username, ur.authority from users u, user_roles ur 
+		      where u.user_id = ur.user_id and u.username =?  " /> 
+
+  		<!-- <user-service>
+      		<user name="admin" password="5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8" authorities="ROLE_ADMIN" />
+      		<user name="user" password="5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8" authorities="ROLE_USER" />
+  		</user-service> -->
+ 
+	</authentication-provider>
+
+    <!-- ending database backed user authentication -->
+    
         <!-- SHA-256 values can be produced using 'echo -n your_desired_password | sha256sum' (using normal *nix environments) -->
-        <authentication-provider>
+        <!-- <authentication-provider>
             <password-encoder hash="sha-256" />
             <user-service>
-            	<!--  -->
+            	
                 <user name="admin" password="5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8" authorities="ROLE_ADMIN" />
                 <user name="user" password="5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8" authorities="ROLE_USER" />
             </user-service>
-        </authentication-provider>
+        </authentication-provider>-->
     </authentication-manager>
 </beans:beans>

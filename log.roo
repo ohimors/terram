@@ -96,3 +96,48 @@ jquery api install
 exit
 // Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-10-17 23:55:40
 // Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-11-04 20:51:19
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-11-24 13:46:39
+entity jpa --class ~.model.security.Principal --table security_principals
+help
+field string --fieldName username --notNull --sizeMax 50 --sizeMin 3
+field string --fieldName password --notNull --sizeMax 50 --sizeMin 3
+field boolean --fieldName enabled
+entity jpa --class ~.model.security.Authority --table security_authorities
+field string --fieldName roleId --notNull --sizeMax 10 --sizeMin 8
+// [failed] field string --fieldName roleId --notNull --sizeMax 20 --sizeMin 5
+field string --fieldName authority --notNull --sizeMax 50 --sizeMin 8 --regexp ^ROLE_[A-Z]*
+entity jpa --class ~.model.securtiy.AuthorityPrincipalAssignment --table security_role_assignments
+field reference --fieldName username --type ~.model.security.Principal
+field reference --fieldName roleId --type ~.model.security.Authority
+web mvc scaffold --class ~.web.security.UserController --backingType ~.model.security.Principal --path /security/users
+web mvc scaffold --class ~.web.security.RoleController --backingType ~.model.security.Authority --path /security/roles
+web mvc scaffold --class ~.web.security.RoleMappingController --backingType ~.model.security.AuthorityPrincipalAssignment --path /security/assignments
+web mvc scaffold --class ~.web.security.RoleMappingController --backingType ~.model.security.AuthorityPrincipalAssignment --path /security/assignments
+quit
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-11-24 14:43:56
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-11-24 14:49:25
+// [failed] web mvc scaffold --class ~.web.security.RoleMappingController  --backingType ~.model.security.AuthorityPrincipalAssignment  --path /security/assignments
+entity jpa --class ~.model.security.AuthorityPrincipalAssignment --table security_role_assignments
+field reference --fieldName username --type ~.model.security.Principal
+field reference --fieldName roleId --type ~.model.security.Authority
+quit
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-11-24 14:55:42
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-11-24 15:52:39
+web mvc scaffold --class ~.web.security.RoleController --backingType ~.model.security.Authority --path /security/roles
+quit
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-11-24 15:57:38
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-12-08 13:53:11
+// [failed] focus --class  ~.model.Users
+focus --class  ~.Users
+field boolean --fieldName enabled 
+entity jpa --class ~.UserRoles --testAutomatically
+// [failed] field set --fieldName id --type string 
+// [failed] field set --fieldName id --type java.lang.String
+field string --fieldName id
+// [failed] field other --type com.terram.Users --fieldName user
+field other --type com.terram.Users --fieldName users
+field string --fieldName authority
+exit
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-12-08 14:08:27
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-12-08 17:17:59
+focus --class ~.UserRoles

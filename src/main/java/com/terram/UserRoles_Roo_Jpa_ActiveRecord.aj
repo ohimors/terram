@@ -3,73 +3,73 @@
 
 package com.terram;
 
-import com.terram.Users;
+import com.terram.UserRoles;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.springframework.transaction.annotation.Transactional;
 
-privileged aspect Users_Roo_Jpa_ActiveRecord {
+privileged aspect UserRoles_Roo_Jpa_ActiveRecord {
     
     @PersistenceContext
-    transient EntityManager Users.entityManager;
+    transient EntityManager UserRoles.entityManager;
     
-    public static final EntityManager Users.entityManager() {
-        EntityManager em = new Users().entityManager;
+    public static final EntityManager UserRoles.entityManager() {
+        EntityManager em = new UserRoles().entityManager;
         if (em == null) throw new IllegalStateException("Entity manager has not been injected (is the Spring Aspects JAR configured as an AJC/AJDT aspects library?)");
         return em;
     }
     
-    public static long Users.countUserses() {
-        return entityManager().createQuery("SELECT COUNT(o) FROM Users o", Long.class).getSingleResult();
+    public static long UserRoles.countUserRoleses() {
+        return entityManager().createQuery("SELECT COUNT(o) FROM UserRoles o", Long.class).getSingleResult();
     }
     
-    public static List<Users> Users.findAllUserses() {
-        return entityManager().createQuery("SELECT o FROM Users o", Users.class).getResultList();
+    public static List<UserRoles> UserRoles.findAllUserRoleses() {
+        return entityManager().createQuery("SELECT o FROM UserRoles o", UserRoles.class).getResultList();
     }
     
-    public static Users Users.findUsers(Long id) {
+    public static UserRoles UserRoles.findUserRoles(Long id) {
         if (id == null) return null;
-        return entityManager().find(Users.class, id);
+        return entityManager().find(UserRoles.class, id);
     }
     
-    public static List<Users> Users.findUsersEntries(int firstResult, int maxResults) {
-        return entityManager().createQuery("SELECT o FROM Users o", Users.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
+    public static List<UserRoles> UserRoles.findUserRolesEntries(int firstResult, int maxResults) {
+        return entityManager().createQuery("SELECT o FROM UserRoles o", UserRoles.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
     }
     
     @Transactional
-    public void Users.persist() {
+    public void UserRoles.persist() {
         if (this.entityManager == null) this.entityManager = entityManager();
         this.entityManager.persist(this);
     }
     
     @Transactional
-    public void Users.remove() {
+    public void UserRoles.remove() {
         if (this.entityManager == null) this.entityManager = entityManager();
         if (this.entityManager.contains(this)) {
             this.entityManager.remove(this);
         } else {
-            Users attached = Users.findUsers(this.id);
+            UserRoles attached = UserRoles.findUserRoles(this.id);
             this.entityManager.remove(attached);
         }
     }
     
     @Transactional
-    public void Users.flush() {
+    public void UserRoles.flush() {
         if (this.entityManager == null) this.entityManager = entityManager();
         this.entityManager.flush();
     }
     
     @Transactional
-    public void Users.clear() {
+    public void UserRoles.clear() {
         if (this.entityManager == null) this.entityManager = entityManager();
         this.entityManager.clear();
     }
     
     @Transactional
-    public Users Users.merge() {
+    public UserRoles UserRoles.merge() {
         if (this.entityManager == null) this.entityManager = entityManager();
-        Users merged = this.entityManager.merge(this);
+        UserRoles merged = this.entityManager.merge(this);
         this.entityManager.flush();
         return merged;
     }

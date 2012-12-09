@@ -9,8 +9,8 @@ import javax.persistence.TypedQuery;
 
 privileged aspect Users_Roo_Finder {
     
-    public static TypedQuery<Users> Users.findUsersesByIdEquals(String id) {
-        if (id == null || id.length() == 0) throw new IllegalArgumentException("The id argument is required");
+    public static TypedQuery<Users> Users.findUsersesByIdEquals(Long id) {
+        if (id == null) throw new IllegalArgumentException("The id argument is required");
         EntityManager em = Users.entityManager();
         TypedQuery<Users> q = em.createQuery("SELECT o FROM Users AS o WHERE o.id = :id", Users.class);
         q.setParameter("id", id);

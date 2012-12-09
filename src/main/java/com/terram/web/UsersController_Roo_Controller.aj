@@ -8,8 +8,6 @@ import com.terram.web.UsersController;
 import java.io.UnsupportedEncodingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import org.joda.time.format.DateTimeFormat;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,7 +27,7 @@ privileged aspect UsersController_Roo_Controller {
         }
         uiModel.asMap().clear();
         users.persist();
-        return "redirect:/userses/" + encodeUrlPathSegment(users.getId_().toString(), httpServletRequest);
+        return "redirect:/userses/" + encodeUrlPathSegment(users.getId().toString(), httpServletRequest);
     }
     
     @RequestMapping(params = "form", produces = "text/html")
@@ -38,11 +36,10 @@ privileged aspect UsersController_Roo_Controller {
         return "userses/create";
     }
     
-    @RequestMapping(value = "/{id_}", produces = "text/html")
-    public String UsersController.show(@PathVariable("id_") Long id_, Model uiModel) {
-        addDateTimeFormatPatterns(uiModel);
-        uiModel.addAttribute("users", Users.findUsers(id_));
-        uiModel.addAttribute("itemId", id_);
+    @RequestMapping(value = "/{id}", produces = "text/html")
+    public String UsersController.show(@PathVariable("id") Long id, Model uiModel) {
+        uiModel.addAttribute("users", Users.findUsers(id));
+        uiModel.addAttribute("itemId", id);
         return "userses/show";
     }
     
@@ -57,7 +54,6 @@ privileged aspect UsersController_Roo_Controller {
         } else {
             uiModel.addAttribute("userses", Users.findAllUserses());
         }
-        addDateTimeFormatPatterns(uiModel);
         return "userses/list";
     }
     
@@ -69,18 +65,18 @@ privileged aspect UsersController_Roo_Controller {
         }
         uiModel.asMap().clear();
         users.merge();
-        return "redirect:/userses/" + encodeUrlPathSegment(users.getId_().toString(), httpServletRequest);
+        return "redirect:/userses/" + encodeUrlPathSegment(users.getId().toString(), httpServletRequest);
     }
     
-    @RequestMapping(value = "/{id_}", params = "form", produces = "text/html")
-    public String UsersController.updateForm(@PathVariable("id_") Long id_, Model uiModel) {
-        populateEditForm(uiModel, Users.findUsers(id_));
+    @RequestMapping(value = "/{id}", params = "form", produces = "text/html")
+    public String UsersController.updateForm(@PathVariable("id") Long id, Model uiModel) {
+        populateEditForm(uiModel, Users.findUsers(id));
         return "userses/update";
     }
     
-    @RequestMapping(value = "/{id_}", method = RequestMethod.DELETE, produces = "text/html")
-    public String UsersController.delete(@PathVariable("id_") Long id_, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
-        Users users = Users.findUsers(id_);
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
+    public String UsersController.delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
+        Users users = Users.findUsers(id);
         users.remove();
         uiModel.asMap().clear();
         uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
@@ -88,13 +84,8 @@ privileged aspect UsersController_Roo_Controller {
         return "redirect:/userses";
     }
     
-    void UsersController.addDateTimeFormatPatterns(Model uiModel) {
-        uiModel.addAttribute("users_lastrevised_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
-    }
-    
     void UsersController.populateEditForm(Model uiModel, Users users) {
         uiModel.addAttribute("users", users);
-        addDateTimeFormatPatterns(uiModel);
     }
     
     String UsersController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

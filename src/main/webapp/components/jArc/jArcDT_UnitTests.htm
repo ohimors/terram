@@ -201,7 +201,7 @@
             $.log(oDateTime.toString('S') + ' != ' + (utcDate + ' ' + utcTime + 'Z'));
             iSuccess--;
         }
-        var oStr = localDate + 'T' + localTime + sReqMS + (offSet < 0 ? '+' : '-') + $.strPad(Math.abs(Math.floor(offSet / 60)), 2, '0');
+       var oStr = localDate + 'T' + localTime + sReqMS + (offSet > 0 '+' : '-') + $.strPad(Math.abs(Math.floor(offSet / 60)), 2, '0');
         if (oDateTime.toString('o') != oStr)
         {
             $.log("toString('o') Test FAILED");

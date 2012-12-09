@@ -9,7 +9,6 @@ import com.terram.Code;
 import com.terram.CodeCategory;
 import com.terram.Event;
 import com.terram.SessionToken;
-import com.terram.Users;
 import com.terram.UsersCalendar;
 import com.terram.web.ApplicationConversionServiceFactoryBean;
 import org.springframework.beans.factory.annotation.Configurable;
@@ -164,30 +163,6 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         };
     }
     
-    public Converter<Users, String> ApplicationConversionServiceFactoryBean.getUsersToStringConverter() {
-        return new org.springframework.core.convert.converter.Converter<com.terram.Users, java.lang.String>() {
-            public String convert(Users users) {
-                return new StringBuilder().append(users.getId()).append(' ').append(users.getUsername()).append(' ').append(users.getPassword()).append(' ').append(users.getLastRevised()).toString();
-            }
-        };
-    }
-    
-    public Converter<Long, Users> ApplicationConversionServiceFactoryBean.getIdToUsersConverter() {
-        return new org.springframework.core.convert.converter.Converter<java.lang.Long, com.terram.Users>() {
-            public com.terram.Users convert(java.lang.Long id) {
-                return Users.findUsers(id);
-            }
-        };
-    }
-    
-    public Converter<String, Users> ApplicationConversionServiceFactoryBean.getStringToUsersConverter() {
-        return new org.springframework.core.convert.converter.Converter<java.lang.String, com.terram.Users>() {
-            public com.terram.Users convert(String id) {
-                return getObject().convert(getObject().convert(id, Long.class), Users.class);
-            }
-        };
-    }
-    
     public Converter<UsersCalendar, String> ApplicationConversionServiceFactoryBean.getUsersCalendarToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<com.terram.UsersCalendar, java.lang.String>() {
             public String convert(UsersCalendar usersCalendar) {
@@ -231,9 +206,6 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         registry.addConverter(getSessionTokenToStringConverter());
         registry.addConverter(getIdToSessionTokenConverter());
         registry.addConverter(getStringToSessionTokenConverter());
-        registry.addConverter(getUsersToStringConverter());
-        registry.addConverter(getIdToUsersConverter());
-        registry.addConverter(getStringToUsersConverter());
         registry.addConverter(getUsersCalendarToStringConverter());
         registry.addConverter(getIdToUsersCalendarConverter());
         registry.addConverter(getStringToUsersCalendarConverter());
